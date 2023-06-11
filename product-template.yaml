@@ -1,32 +1,25 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Parameters:
-  InstanceType:
-    Type: String
-    Description: EC2 instance type
-    Default: t2.micro
-  CustomTags:
-    Type: CommaDelimitedList
-    Description: Custom tags to apply to the EC2 instance
-    Default: ''
-
 Resources:
-  EC2Instance:
-    Type: AWS::EC2::Instance
+  MyServiceCatalogProduct:
+    Type: 'AWS::ServiceCatalog::CloudFormationProduct'
     Properties:
-      ImageId: ami-12345678  # Replace with the desired AMI ID
-      InstanceType: !Ref InstanceType
+      Name: MyProduct
+      Description: My Service Catalog Product
+      Owner: MyCompany
+      ProvisioningArtifactParameters:
+        - Name: v1.0.0
+          Description: Version 1.0.0
+          Info:
+            LoadTemplateFromURL: 'https://github.com/your-organization/your-repo/raw/main/product-template.yaml'
+      Distributor: MyCompany
+      SupportDescription: For assistance, contact support@mycompany.com
+      SupportEmail: support@mycompany.com
+      SupportUrl: 'https://www.mycompany.com/support'
+      ProvisioningArtifactPreferences:
+        StackSetAccounts:
+          - 'YOUR_ACCOUNT_ID'
+        StackSetRegions:
+          - 'us-east-1'
       Tags:
-        - Key: Name
-          Value: MyEC2Instance
-        - Key: Environment
-          Value: Production
-        - Key: ${CustomTags[0]}
-          Value: ${CustomTags[1]}
-        - Key: ${CustomTags[2]}
-          Value: ${CustomTags[3]}
-        - Key: ${CustomTags[4]}
-          Value: ${CustomTags[5]}
-        - Key: ${CustomTags[6]}
-          Value: ${CustomTags[7]}
-        - Key: ${CustomTags[8]}
-          Value: ${CustomTags[9]}
+        - Key: CostCenter
+          Value: '12345'
