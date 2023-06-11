@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyServiceCatalogProduct:
+    Type: 'AWS::ServiceCatalog::CloudFormationProduct'
+    Properties:
+      Name: MyProduct
+      Description: My Service Catalog Product
+      Owner: MyCompany
+      ProvisioningArtifactParameters:
+        - Name: v1.0.0
+          Description: Version 1.0.0
+          Info:
+            LoadTemplateFromURL: 'https://github.com/your-organization/your-repo/raw/main/product-template.yaml'
+      Distributor: MyCompany
+      SupportDescription: For assistance, contact support@mycompany.com
+      SupportEmail: support@mycompany.com
+      SupportUrl: 'https://www.mycompany.com/support'
+      ProvisioningArtifactPreferences:
+        StackSetAccounts:
+          - 'YOUR_ACCOUNT_ID'
+        StackSetRegions:
+          - 'us-east-1'
+      Tags:
+        - Key: CostCenter
+          Value: '12345'
