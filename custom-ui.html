@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom EC2 Product UI</title>
+  <style>
+    .tag-input {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Custom EC2 Product UI</h1>
+  
+  <div id="tags-container">
+    <div class="tag-input">
+      <input type="text" class="tag-name" placeholder="Tag Name">
+      <input type="text" class="tag-value" placeholder="Tag Value">
+    </div>
+  </div>
+
+  <button id="add-tag-button">Add Tag</button>
+  
+  <script>
+    // Function to handle adding a new tag input field
+    function addTagInput() {
+      const tagsContainer = document.getElementById("tags-container");
+
+      if (tagsContainer.children.length >= 10) {
+        // Limit the number of tags to 10
+        return;
+      }
+
+      const newTagInput = document.createElement("div");
+      newTagInput.className = "tag-input";
+
+      const tagNameInput = document.createElement("input");
+      tagNameInput.type = "text";
+      tagNameInput.className = "tag-name";
+      tagNameInput.placeholder = "Tag Name";
+
+      const tagValueInput = document.createElement("input");
+      tagValueInput.type = "text";
+      tagValueInput.className = "tag-value";
+      tagValueInput.placeholder = "Tag Value";
+
+      newTagInput.appendChild(tagNameInput);
+      newTagInput.appendChild(tagValueInput);
+
+      tagsContainer.appendChild(newTagInput);
+    }
+
+    // Event listener for add tag button
+    document.getElementById("add-tag-button").addEventListener("click", addTagInput);
+  </script>
+</body>
+</html>
