@@ -1,10 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
-
 Parameters:
   InstanceType:
     Type: String
     Description: EC2 instance type
     Default: t2.micro
+  CustomTags:
+    Type: CommaDelimitedList
+    Description: Custom tags to apply to the EC2 instance
+    Default: ''
 
 Resources:
   EC2Instance:
@@ -17,13 +20,8 @@ Resources:
           Value: MyEC2Instance
         - Key: Environment
           Value: Production
-        - !If
-          - Condition: ShouldAddCustomTags
-            Fn::Split:
-              - ','
-              - !Ref CustomTags
-          - !Ref CustomTags
-          - !Ref "AWS::NoValue"
-
-Conditions:
-  ShouldAddCustomTags: !Not [!Equals [!Ref CustomTags, ""]]
+        # Dynamically add custom tags based on user input
+        {% for tagIndex, tagName in enumerate(CustomTags[::2]) %}
+        - Key: !Ref 'CustomTags[${tagIndex * 2}]'
+          Value: !Ref 'CustomTags[${tagIndex * 2 + 1}]'
+        {% endfor %}
