@@ -4,7 +4,7 @@
     "MyServiceCatalogProduct": {
       "Type": "AWS::ServiceCatalog::CloudFormationProduct",
       "Properties": {
-        "Name": "MyProduct",
+        "Name": "ec2-product",
         "Description": "My Service Catalog Product",
         "Owner": "MyCompany",
         "ProvisioningArtifactParameters": [
@@ -12,10 +12,7 @@
             "Name": "v1.0.0",
             "Description": "Version 1.0.0",
             "Info": {
-              "LoadTemplateFromURL": "https://github.com/BenCamareno/service-catalog/blob/main/product-template.yaml",
-              "UI": {
-                "TemplateURL": "https://github.com/BenCamareno/service-catalog/blob/main/custom-ui.html"
-              }
+              "LoadTemplateFromURL": "https://github.com/BenCamareno/service-catalog/blob/main/product-template.yaml"
             }
           }
         ],
@@ -28,7 +25,10 @@
             "Key": "CostCenter",
             "Value": "12345"
           }
-        ]
+        ],
+        "UI": {
+          "TemplateURL": "https://github.com/BenCamareno/service-catalog/blob/main/custom-ui.html"
+        }
       }
     }
   }
